@@ -70,6 +70,32 @@ def preencherCampos(event) -> None:
     comboCursos.set(aluno["curso"])
 
 
+def editarAluno() -> None:
+
+    nome = txtNome.get()
+    idade = int(txtIdade.get())
+    curso = comboCursos.get()
+    novato = opcao.get()
+
+    opcaoSelecionada = messagebox.askyesno("Confirmação de alteração!","Deseja Alterar Os dados!")
+    if opcaoSelecionada:
+        aluno = alunos[index]
+        aluno["nome"] = nome
+        aluno["idade"] = idade
+        aluno["curso"] = curso
+        aluno["novato"] = novato
+        messagebox.showinfo("Sucesso!", "Dados alterados com sucesso!")
+    limparCampos()
+    atualizarTabela()
+
+def deletarAluno () -> None:
+    opcaoSelecionada = messagebox.askyesno("Confirmação de alteração!","Deseja remover os dados!")
+    if opcaoSelecionada:
+        alunos.remove(alunos[index])
+        messagebox.showinfo("Sucesso!", "Dados removidos com sucesso!")
+    limparCampos()
+    atualizarTabela()
+
 
 janela = Tk()
 
@@ -113,11 +139,11 @@ btnAdicionar= Button(janela, text="Adicionar", font="Calibri 12 bold", fg="Black
 btnAdicionar.grid(row=6, column=0)
 
 btnEditar= Button(janela, text="Editar", font="Calibri 12 bold", fg="Black",
-                     background="PaleGoldenrod", width=10)
+                     background="PaleGoldenrod", width=10, command=editarAluno)
 btnEditar.grid(row=6, column=1)
 
 btnExcluir= Button(janela, text="Excluir", font="Calibri 12 bold", fg="Black",
-                     background="PaleGoldenrod",width=10)
+                     background="PaleGoldenrod",width=10, command=deletarAluno)
 btnExcluir.grid(row=6, column=2)
 
 colunas=["Matricula", "Nome", "Idade", "Curso", "Novato?"]
